@@ -105,7 +105,7 @@ dependencies {
 
     // Moshi
     implementation("com.squareup.moshi:moshi:$moshiVersion")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     // Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
