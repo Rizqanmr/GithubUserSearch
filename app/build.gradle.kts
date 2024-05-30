@@ -68,7 +68,8 @@ dependencies {
     val hiltVersion = "2.50"
     val roomVersion = "2.6.1"
     val retrofitVersion = "2.9.0"
-    val moshiVersion = "1.12.0"
+    val moshiVersion = "1.14.0"
+    val chuckerVersion = "4.0.0"
 
     // Android X
     implementation("androidx.core:core-ktx:1.13.1")
@@ -105,10 +106,11 @@ dependencies {
 
     // Moshi
     implementation("com.squareup.moshi:moshi:$moshiVersion")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     // Chucker
-    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+    debugImplementation("com.github.chuckerteam.chucker:library:$chuckerVersion")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
