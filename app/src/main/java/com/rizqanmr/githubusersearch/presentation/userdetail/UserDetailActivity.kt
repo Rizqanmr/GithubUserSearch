@@ -8,9 +8,14 @@ import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 import com.rizqanmr.githubusersearch.data.Constant
+import com.rizqanmr.githubusersearch.data.models.UserDetail
 import com.rizqanmr.githubusersearch.databinding.ActivityUserDetailBinding
+import com.rizqanmr.githubusersearch.presentation.userdetail.viewmodel.UserDetailViewModel
 import com.rizqanmr.githubusersearch.utils.setCircleImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,17 +33,16 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityUserDetailBinding
-    private var username = ""
+    private val viewModel: UserDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        username = intent.getStringExtra(Constant.EXTRA_USERNAME).toString()
-
         setupToolbar()
-        setupViews()
+        setupObservers()
+        viewModel.getUserDetail(intent.getStringExtra(Constant.EXTRA_USERNAME).toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,23 +66,30 @@ class UserDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupObservers() {
+        viewModel.getIsLoading().observe(this) {
+            showLoading(it)
+        }
+        viewModel.userDetailLiveData().observe(this) {
+            mappingUserDetail(it)
+        }
+        viewModel.errorUserDetailLiveData().observe(this) {
+            Snackbar.make(binding.root, it.toString(), Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
     @SuppressLint("PrivateResource")
-    private fun setupViews() {
+    private fun mappingUserDetail(userDetail: UserDetail) {
         with(binding) {
+            data = userDetail
             ivAvatar.setCircleImageUrl(
-                "https://avatars.githubusercontent.com/u/21984934?v=4",
+                userDetail.avatarUrl,
                 com.google.android.material.R.drawable.mtrl_ic_error
             )
-            tvName.text = "Rizqan Mubarak Rahman"
-            tvUsername.text = username
-            tvBio.text = "Android Developer"
-            tvCompany.text = "Google Indonesia"
-            tvLocation.text = "Jakarta Timur, DKI Jakarta"
-            tvBlog.text = "https://rizqanmr.vercel.app/"
-            tvEmail.text = "rizqan@gmail.com"
-            tvFollowers.text = "102K followers"
-            tvFollowing.text = "100 following"
-            tvRepositories.text = "Repositories 34"
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.layoutLoading.progressLoading.isVisible = isLoading
     }
 }
