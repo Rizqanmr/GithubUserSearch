@@ -1,6 +1,6 @@
 package com.rizqanmr.githubusersearch.di
 
-import com.rizqanmr.githubusersearch.data.ApiService
+import com.rizqanmr.githubusersearch.data.network.ApiService
 import com.rizqanmr.githubusersearch.domain.repository.RemoteDataSource
 import com.rizqanmr.githubusersearch.domain.repository.RemoteRepository
 import dagger.Module

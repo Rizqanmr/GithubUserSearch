@@ -1,15 +1,15 @@
 package com.rizqanmr.githubusersearch.domain.repository
 
-import com.rizqanmr.githubusersearch.data.Result
-import com.rizqanmr.githubusersearch.data.models.UserDetail
-import com.rizqanmr.githubusersearch.data.models.UserSearchResult
-import com.rizqanmr.githubusersearch.data.models.Users
+import com.rizqanmr.githubusersearch.data.network.Result
+import com.rizqanmr.githubusersearch.data.network.models.UserDetailNetwork
+import com.rizqanmr.githubusersearch.data.network.models.UserSearchResult
+import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
 
 interface RemoteDataSource {
 
-    suspend fun getListUser(): Result<List<Users>>
+    suspend fun getListUser(): Result<List<UserNetwork>>
 
-    suspend fun getUserDetail(username: String) : Result<UserDetail>
+    suspend fun getUserDetail(username: String) : Result<UserDetailNetwork>
 
     suspend fun searchUsers(query: String) : Result<UserSearchResult>
 }

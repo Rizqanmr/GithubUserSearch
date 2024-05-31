@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rizqanmr.githubusersearch.data.Result
-import com.rizqanmr.githubusersearch.data.models.Users
+import com.rizqanmr.githubusersearch.data.network.Result
+import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
 import com.rizqanmr.githubusersearch.domain.repository.RemoteDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(
 ) : MainViewModelContract, CoroutineScope, ViewModel() {
 
     private val isLoading = MutableLiveData<Boolean>()
-    private val listUserLiveData: MutableLiveData<List<Users>> = MutableLiveData()
+    private val listUserLiveData: MutableLiveData<List<UserNetwork>> = MutableLiveData()
     private val errorListUserLiveData: MutableLiveData<String> = MutableLiveData()
 
     override val coroutineContext: CoroutineContext
@@ -43,7 +43,7 @@ class MainViewModel @Inject constructor(
         setIsLoading(false)
     }
 
-    override fun listUserLiveData(): MutableLiveData<List<Users>> = listUserLiveData
+    override fun listUserLiveData(): MutableLiveData<List<UserNetwork>> = listUserLiveData
 
     override fun errorListUserLiveData(): LiveData<String> = errorListUserLiveData
 }

@@ -1,10 +1,10 @@
-package com.rizqanmr.githubusersearch.data.models
+package com.rizqanmr.githubusersearch.data.network.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class UserDetail(
+data class UserDetailNetwork(
     @Json(name = "bio")
     val bio: String?,
     @Json(name = "login")

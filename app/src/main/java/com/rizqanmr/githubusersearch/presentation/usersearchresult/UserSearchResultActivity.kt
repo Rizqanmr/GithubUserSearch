@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.rizqanmr.githubusersearch.data.Constant
-import com.rizqanmr.githubusersearch.data.models.Users
+import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
 import com.rizqanmr.githubusersearch.databinding.ActivityUserSearchResultBinding
 import com.rizqanmr.githubusersearch.databinding.ItemUserBinding
 import com.rizqanmr.githubusersearch.presentation.main.UserAdapter
@@ -74,7 +74,7 @@ class UserSearchResultActivity : AppCompatActivity() {
 
     private fun selectedUser() {
         userAdapter.setUserListener(object : UserAdapter.UserListener {
-            override fun onItemClick(itemUserBinding: ItemUserBinding, user: Users?) {
+            override fun onItemClick(itemUserBinding: ItemUserBinding, user: UserNetwork?) {
                 UserDetailActivity.newIntent(this@UserSearchResultActivity, bundleOf().apply {
                     putString(Constant.EXTRA_USERNAME, user?.username)
                 })

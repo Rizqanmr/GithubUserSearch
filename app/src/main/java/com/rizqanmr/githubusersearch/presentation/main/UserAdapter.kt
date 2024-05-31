@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.rizqanmr.githubusersearch.data.models.Users
+import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
 import com.rizqanmr.githubusersearch.databinding.ItemUserBinding
 import com.rizqanmr.githubusersearch.utils.setCircleImageUrl
 
@@ -14,19 +14,19 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private lateinit var userListener: UserListener
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Users>() {
-        override fun areItemsTheSame(oldItem: Users, newItem: Users): Boolean {
+    private val diffUtil = object : DiffUtil.ItemCallback<UserNetwork>() {
+        override fun areItemsTheSame(oldItem: UserNetwork, newItem: UserNetwork): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Users, newItem: Users): Boolean {
+        override fun areContentsTheSame(oldItem: UserNetwork, newItem: UserNetwork): Boolean {
             return oldItem == newItem
         }
     }
 
     private val asyncListDiffer = AsyncListDiffer(this, diffUtil)
 
-    fun saveData(dataResponse: List<Users>){
+    fun saveData(dataResponse: List<UserNetwork>){
         asyncListDiffer.submitList(dataResponse)
     }
 
@@ -36,7 +36,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("PrivateResource")
-        fun bindData(user: Users?, listener: UserListener) {
+        fun bindData(user: UserNetwork?, listener: UserListener) {
             binding.let { itemUser ->
                 itemUser.item = user
                 with(itemUser) {
@@ -51,7 +51,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     }
 
     interface UserListener {
-        fun onItemClick(itemUserBinding: ItemUserBinding, user: Users?)
+        fun onItemClick(itemUserBinding: ItemUserBinding, user: UserNetwork?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

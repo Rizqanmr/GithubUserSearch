@@ -4,7 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.rizqanmr.githubusersearch.BuildConfig
-import com.rizqanmr.githubusersearch.data.ApiService
+import com.rizqanmr.githubusersearch.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

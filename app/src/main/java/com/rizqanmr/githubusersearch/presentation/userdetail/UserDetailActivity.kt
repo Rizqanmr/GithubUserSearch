@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.rizqanmr.githubusersearch.data.Constant
-import com.rizqanmr.githubusersearch.data.models.UserDetail
+import com.rizqanmr.githubusersearch.data.network.models.UserDetailNetwork
 import com.rizqanmr.githubusersearch.databinding.ActivityUserDetailBinding
 import com.rizqanmr.githubusersearch.presentation.userdetail.viewmodel.UserDetailViewModel
 import com.rizqanmr.githubusersearch.utils.setCircleImageUrl
@@ -79,11 +79,11 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     @SuppressLint("PrivateResource")
-    private fun mappingUserDetail(userDetail: UserDetail) {
+    private fun mappingUserDetail(userDetailNetwork: UserDetailNetwork) {
         with(binding) {
-            data = userDetail
+            data = userDetailNetwork
             ivAvatar.setCircleImageUrl(
-                userDetail.avatarUrl,
+                userDetailNetwork.avatarUrl,
                 com.google.android.material.R.drawable.mtrl_ic_error
             )
         }
