@@ -6,14 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".presentation.usersearchresult.UserSearchResultActivity">
 
-    <TextView
-        android:id="@+id/tvResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp24"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserResults"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp0"
+        android:paddingVertical="@dimen/dp8"
+        android:paddingHorizontal="@dimen/dp16"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_user"
+        tools:itemCount="7" />
+
+    <include
+        android:id="@+id/layoutLoading"
+        layout="@layout/layout_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

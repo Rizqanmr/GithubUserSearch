@@ -5,7 +5,6 @@ import android.content.ComponentName
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
     private fun selectedUser() {
         userAdapter.setUserListener(object : UserAdapter.UserListener {
             override fun onItemClick(itemUserBinding: ItemUserBinding, user: Users?) {
-                Log.d("MYTAG", "${user?.username} clicked")
                 UserDetailActivity.newIntent(this@MainActivity, bundleOf().apply {
                     putString(Constant.EXTRA_USERNAME, user?.username)
                 })
