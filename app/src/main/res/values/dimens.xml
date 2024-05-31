@@ -27,4 +27,5 @@
     <dimen name="sp18">18sp</dimen>
     <dimen name="sp20">20sp</dimen>
     <dimen name="sp24">24sp</dimen>
+    <dimen name="sp36">36sp</dimen>
 </resources>

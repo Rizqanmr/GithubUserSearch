@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.rizqanmr.githubusersearch.data.Constant
 import com.rizqanmr.githubusersearch.data.models.Users
 import com.rizqanmr.githubusersearch.databinding.ActivityMainBinding
 import com.rizqanmr.githubusersearch.databinding.ItemUserBinding
 import com.rizqanmr.githubusersearch.presentation.main.viewmodel.MainViewModel
+import com.rizqanmr.githubusersearch.presentation.userdetail.UserDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         userAdapter.setUserListener(object : UserAdapter.UserListener {
             override fun onItemClick(itemUserBinding: ItemUserBinding, user: Users?) {
                 Log.d("MYTAG", "${user?.username} clicked")
+                UserDetailActivity.newIntent(this@MainActivity, bundleOf().apply {
+                    putString(Constant.EXTRA_USERNAME, user?.username)
+                })
             }
 
         })
