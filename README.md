@@ -39,7 +39,17 @@ This project using the libraries:
 <img src="https://github.com/Rizqanmr/GithubUserSearch/blob/master/screenshots/Screenshot_Chucker.jpg" width="25%" alt="Chucker"></img>
 
 ## NOTES
-Before build and run this project. Go to local.properties and add 2 lines code:
+- Download this project
+- Open this project with Android Studio
+- Before build and run this project. Go to local.properties and add 2 lines code:
 
+```
 BASE_URL = "https://api.github.com"
 API_KEY = "Enter your github personal access token"
+```
+
+- Sync Project with Gradle File
+- Run 
+
+How to get personal access token github
+[Here](https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
