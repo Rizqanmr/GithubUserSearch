@@ -1,19 +1,26 @@
 package com.rizqanmr.githubusersearch.presentation.main
 
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.rizqanmr.githubusersearch.R
 import com.rizqanmr.githubusersearch.data.Constant
 import com.rizqanmr.githubusersearch.data.models.Users
 import com.rizqanmr.githubusersearch.databinding.ActivityMainBinding
 import com.rizqanmr.githubusersearch.databinding.ItemUserBinding
 import com.rizqanmr.githubusersearch.presentation.main.viewmodel.MainViewModel
 import com.rizqanmr.githubusersearch.presentation.userdetail.UserDetailActivity
+import com.rizqanmr.githubusersearch.presentation.usersearchresult.UserSearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +40,18 @@ class MainActivity : AppCompatActivity() {
         setupObservers()
         selectedUser()
         viewModel.getListUsers()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+        val component = ComponentName(this, UserSearchResultActivity::class.java)
+        val searchableInfo = searchManager.getSearchableInfo(component)
+        searchView.setSearchableInfo(searchableInfo)
+
+        return true
     }
 
     private fun setupRecyclerView() {
