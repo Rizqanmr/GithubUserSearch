@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.rizqanmr.githubusersearch.data.network.models.UserNetwork" />
+            type="com.rizqanmr.githubusersearch.data.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

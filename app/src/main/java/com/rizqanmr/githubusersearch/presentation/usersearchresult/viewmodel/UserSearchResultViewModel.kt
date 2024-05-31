@@ -4,23 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rizqanmr.githubusersearch.data.model.User
 import com.rizqanmr.githubusersearch.data.network.Result
-import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
-import com.rizqanmr.githubusersearch.domain.repository.RemoteDataSource
+import com.rizqanmr.githubusersearch.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class UserSearchResultViewModel @Inject constructor(
-    private val repository: RemoteDataSource
+    private val repository: UserRepository
 ) : UserSearchResultViewModelContract, CoroutineScope, ViewModel() {
 
     private val isLoading = MutableLiveData<Boolean>()
-    private val listUserLiveData: MutableLiveData<List<UserNetwork>> = MutableLiveData()
+    private val listUserLiveData: MutableLiveData<List<User>> = MutableLiveData()
     private val errorListUserLiveData: MutableLiveData<String> = MutableLiveData()
 
     override val coroutineContext: CoroutineContext
@@ -35,15 +37,17 @@ class UserSearchResultViewModel @Inject constructor(
     override fun searchUsers(query: String): Job = viewModelScope.launch {
         setIsLoading(true)
 
-        when (val result = repository.searchUsers(query)) {
-            is Result.Success -> listUserLiveData.value = result.data.items
-            is Result.Error -> errorListUserLiveData.value = result.errorBody.toString()
+        withContext(Dispatchers.IO) {
+            when (val result = repository.searchUsers(query)) {
+                is Result.Success -> listUserLiveData.postValue(result.data)
+                is Result.Error -> errorListUserLiveData.postValue(result.exception.localizedMessage)
+            }
         }
 
         setIsLoading(false)
     }
 
-    override fun listUserLiveData(): MutableLiveData<List<UserNetwork>> = listUserLiveData
+    override fun listUserLiveData(): MutableLiveData<List<User>> = listUserLiveData
 
     override fun errorListUserLiveData(): LiveData<String> = errorListUserLiveData
 }

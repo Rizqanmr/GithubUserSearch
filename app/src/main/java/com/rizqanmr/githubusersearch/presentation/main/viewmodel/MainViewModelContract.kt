@@ -2,7 +2,7 @@ package com.rizqanmr.githubusersearch.presentation.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rizqanmr.githubusersearch.data.network.models.UserNetwork
+import com.rizqanmr.githubusersearch.data.model.User
 import kotlinx.coroutines.Job
 
 interface MainViewModelContract {
@@ -13,7 +13,7 @@ interface MainViewModelContract {
 
     fun getListUsers(): Job
 
-    fun listUserLiveData(): MutableLiveData<List<UserNetwork>>
+    fun listUserLiveData(): MutableLiveData<List<User>>
 
     fun errorListUserLiveData(): LiveData<String>
 }

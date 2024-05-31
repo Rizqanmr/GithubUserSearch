@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizqanmr.githubusersearch.data.network.Result
 import com.rizqanmr.githubusersearch.data.network.models.UserDetailNetwork
-import com.rizqanmr.githubusersearch.domain.repository.RemoteDataSource
+import com.rizqanmr.githubusersearch.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -16,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class UserDetailViewModel @Inject constructor(
-    private val repository: RemoteDataSource
+    private val repository: UserRepository
 ) : UserDetailViewModelContract, CoroutineScope, ViewModel() {
 
     private val isLoading = MutableLiveData<Boolean>()
@@ -37,7 +37,7 @@ class UserDetailViewModel @Inject constructor(
 
         when (val result = repository.getUserDetail(username)) {
             is Result.Success -> userDetailLiveData.value = result.data
-            is Result.Error -> errorUserDetailLiveData.value = result.errorBody.toString()
+            is Result.Error -> errorUserDetailLiveData.value = result.exception.localizedMessage
         }
 
         setIsLoading(false)

@@ -15,10 +15,10 @@ suspend fun <T : Any> safeApiCall(
         } catch (throwable: Throwable) {
             when(throwable){
                 is HttpException -> {
-                    Result.Error(false, throwable.code(), throwable.message)
+                    Result.Error(throwable)
                 }
                 else -> {
-                    Result.Error(true, null, throwable.message)
+                    Result.Error(throwable)
                 }
             }
         }
