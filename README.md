@@ -6,6 +6,7 @@
 - User detail
 - Local data persistence for data caching user list
 - Chucker debugging
+- Unit test and UI test using espresso+MockK
 
 ## architecture and Libraries
 This project implement a clean architecture pattern MVVM. Because to create applications that are clean, 
@@ -25,11 +26,15 @@ This project using the libraries:
 
 - [Moshi](https://github.com/square/moshi) (Json Parsing)
 
-- Okhttp (Logging Interceptor)
+- [Okhttp](https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp) (Logging Interceptor)
 
 - [Chucker](https://github.com/ChuckerTeam/chucker) (Network Debugging)
 
 - [Glide](https://github.com/bumptech/glide) (Image Loading and caching)
+
+- [Espresso](https://developer.android.com/training/testing/espresso?hl=id) (Espresso)
+
+- [MockK](https://github.com/mockk/mockk) (MockK)
 
 
 ## Screenshots
