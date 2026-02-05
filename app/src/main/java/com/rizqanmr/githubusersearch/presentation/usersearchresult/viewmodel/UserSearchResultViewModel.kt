@@ -37,11 +37,9 @@ class UserSearchResultViewModel @Inject constructor(
     override fun searchUsers(query: String): Job = viewModelScope.launch {
         setIsLoading(true)
 
-        withContext(Dispatchers.IO) {
-            when (val result = repository.searchUsers(query)) {
-                is Result.Success -> listUserLiveData.postValue(result.data)
-                is Result.Error -> errorListUserLiveData.postValue(result.exception.localizedMessage)
-            }
+        when (val result = repository.searchUsers(query)) {
+            is Result.Success -> listUserLiveData.value = result.data
+            is Result.Error -> errorListUserLiveData.value = result.exception.localizedMessage
         }
 
         setIsLoading(false)
